@@ -37,8 +37,11 @@ const Navbar = () => {
              }
             </ul>
           </div>
-          <a className="btn btn-ghost normal-case text-white text-xl"><img  className="lg:w-[50px] " src="https://i.ibb.co/tmFHQ4m/Screenshot-1.png" alt="" /></a>
+          <label tabIndex={0} className="btn btn-ghost btn-circle lg:w-16 avatar">
+        <div className="w-full rounded">
+          <img src="https://i.ibb.co/vqz3DZm/Screenshot4225x225.png"/>
         </div>
+      </label>        </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1 text-black lg:text-white">
             {
@@ -55,10 +58,10 @@ const Navbar = () => {
       {console.log('user===========>',user)}
 {
      user?
-  <button onClick={handelsingout}>Sign Out</button>
+  <button className="text-white" onClick={handelsingout}>Sign Out</button>
 :
 <Link to='/login'>
-   <button>Login</button>
+   <button className="text-white">Login</button>
    </Link>
 
 }

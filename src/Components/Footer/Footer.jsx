@@ -3,7 +3,11 @@ const Footer = () => {
     return (
         <footer className="w-full bg-gray-200 p-8">
         <div className="flex flex-row flex-wrap items-center justify-center gap-y-6 gap-x-12 bg-white text-center md:justify-between">
-          <img src="https://i.ibb.co/tmFHQ4m/Screenshot-1.png" alt="logo-ct" className="w-1/12" />
+        <label tabIndex={0} className="btn btn-ghost btn-circle lg:w-16 avatar">
+        <div className="w-full rounded">
+          <img src="https://i.ibb.co/vqz3DZm/Screenshot4225x225.png"/>
+        </div>
+      </label>  
           <ul className="flex flex-wrap items-center gap-y-2 gap-x-8">
             <li>
               <a
