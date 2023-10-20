@@ -1,13 +1,78 @@
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { FcGoogle } from 'react-icons/fc';
+import { useContext } from "react";
+import { AuthContext } from "../../Authprovider/Authprovider";
+import Swal from "sweetalert2";
 
 const Login = () => {
+
+  const {signuprg,googleSignin}=useContext(AuthContext)
+
+
+  const handelGoogle = () => {
+    googleSignin().then((result) => {
+      console.log(result);
+      Swal.fire({
+        icon: "success",
+        title: "Login success",
+        showConfirmButton: false,
+        timer: 3000,
+      });
+      Navigate(location?.state ? location.state : "/");
+
+    });
+};
+
+
+
+const validatePassword = (password) => {
+  // Password must be at least 6 characters long and contain at least 1 capital letter
+  const passwordRegex = /^(?=.*[A-Z])(?=.*[!@#$%^&*]).{6,}$/;
+      return passwordRegex.test(password);
+};
   const handelLogin = (e) => {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
     const email = form.get("email");
     const password = form.get("password");
     console.log(email, password);
+   
+    if (!validatePassword(password)) {
+      Swal.fire({
+        icon: "error",
+        title: "Password validation failed",
+        text: "Password must be at least 6 characters long and contain at least 1 capital letter & special character",
+        showConfirmButton: false,
+        timer: 3000,
+      });
+      return;
+    }
+  
+
+    signuprg(email, password)
+      .then((result) => {
+        console.log(result);
+        Swal.fire({
+          icon: "success",
+          title: "Login success",
+          showConfirmButton: false,
+          timer: 3000,
+        });
+
+        // navigate after log in
+        // navigate(location?.state ? location.state : "/");
+      })
+      .catch((error) => {
+        console.error(error);
+        Swal.fire({
+          icon: "error",
+          title: "Email or password does not match",
+          showConfirmButton: false,
+          timer: 3000,
+        });
+      });
+
+
   };
 
   return (
@@ -108,7 +173,7 @@ const Login = () => {
                 Sign In
               </button>
 
-              <button className="block mx-auto my-3 select-none rounded-lg bg-gradient-to-tr from-[#ff5a1D] to-pink-400 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+              <button onClick={handelGoogle} className="block mx-auto my-3 select-none rounded-lg bg-gradient-to-tr from-[#ff5a1D] to-pink-400 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
               <p className="flex items-center gap-3"><FcGoogle className="text-2xl"></FcGoogle>Google Login</p>
               </button>
 

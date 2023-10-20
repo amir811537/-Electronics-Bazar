@@ -1,6 +1,19 @@
-import { NavLink } from "react-router-dom";
+import { useContext } from "react";
+import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../../Authprovider/Authprovider";
 
 const Navbar = () => {
+  const {logOut,user}=useContext(AuthContext)
+
+  const handelsingout =()=>{
+    logOut()
+    .then(result=>{
+      console.log(result)
+    })
+.catch (error =>{
+  console.error(error)
+})
+  }
 
     const navlinks =<>
 
@@ -24,7 +37,7 @@ const Navbar = () => {
              }
             </ul>
           </div>
-          <a className="btn btn-ghost normal-case text-white text-xl"><img  className="w-1/3" src="https://i.ibb.co/tmFHQ4m/Screenshot-1.png" alt="" /></a>
+          <a className="btn btn-ghost normal-case text-white text-xl"><img  className="lg:w-[50px] " src="https://i.ibb.co/tmFHQ4m/Screenshot-1.png" alt="" /></a>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1 text-black lg:text-white">
@@ -36,18 +49,19 @@ const Navbar = () => {
         <div className="navbar-end">
         <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
         <div className="w-10 rounded-full">
-          <img src=""/>
+          <img src="https://i.ibb.co/gjNbZy2/user.png"/>
         </div>
       </label>
-{/* {
-  user?
-  <button onClick={handelsignout}>Sign Out</button>
+      {console.log('user===========>',user)}
+{
+     user?
+  <button onClick={handelsingout}>Sign Out</button>
 :
 <Link to='/login'>
    <button>Login</button>
    </Link>
 
-} */}
+}
 
 
 

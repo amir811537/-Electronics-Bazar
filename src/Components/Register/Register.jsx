@@ -1,7 +1,18 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../Authprovider/Authprovider";
+import Swal from "sweetalert2";
 
 const Register = () => {
+ 
+  const {createUser}=useContext(AuthContext)
 
+
+  const validatePassword = (password) => {
+    // Password must be at least 6 characters long and contain at least 1 capital letter
+    const passwordRegex = /^(?=.*[A-Z])(?=.*[!@#$%^&*]).{6,}$/;
+        return passwordRegex.test(password);
+  };
 
     const handelRegister = (e) => {
         e.preventDefault();
@@ -10,6 +21,32 @@ const Register = () => {
         const password = form.get("password");
         const name = form.get("name");
     console.log(name,email,password)
+
+
+    if (!validatePassword(password)) {
+      Swal.fire({
+        icon: "error",
+        title: "Password validation failed",
+        text: "Password must be at least 6 characters long and contain at least 1 capital letter & special character",
+        showConfirmButton: false,
+        timer: 3000,
+      });
+      return;
+    }
+
+    createUser(email, password)
+      .then((result) => {
+        console.log(result);
+        Swal.fire({
+          icon: "success",
+          title: "Registration successful",
+          showConfirmButton: false,
+          timer: 3000,
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
        
       };
     
