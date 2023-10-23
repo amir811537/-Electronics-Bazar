@@ -7,6 +7,10 @@ import Login from "../Components/Login/Login";
 import Register from "../Components/Register/Register";
 import ErrorPage from "../Components/pages/ErrorPage";
 import Alldata from "../Components/pages/Alldata";
+import Updateproduct from "../Components/pages/Updateproduct";
+import Singelbranddata from "../Components/pages/Singelbranddata";
+import PrivateRoute from "./PrivateRoute";
+import Detailsproduct from "../Components/pages/Detailsproduct";
 
 const router=createBrowserRouter([
     {
@@ -20,7 +24,7 @@ const router=createBrowserRouter([
             },
             {
                 path: "/AddProduct",
-                element: <AddProduct></AddProduct>
+                element: <PrivateRoute><AddProduct></AddProduct></PrivateRoute>
             },
             {
                 path: "/myCart",
@@ -34,12 +38,23 @@ const router=createBrowserRouter([
                 path:"/register",
                 element:<Register></Register>
             },
-
-
-
             {
-                path:'alldata',
+                path:'/alldata',
                 element:<Alldata></Alldata>,
+            },
+            {
+                path:'/updateproduct/:id',
+                element:<Updateproduct></Updateproduct>,
+                loader:({params})=>fetch(`http://localhost:5000/productsbyid/${params.id}`)
+            },
+            {
+                path:'/singelbranddata/:brand',
+                element:<Singelbranddata></Singelbranddata>
+            },
+            {
+                path:'/products/:id',
+                element:<Detailsproduct></Detailsproduct>,
+                loader:()=>fetch('http://localhost:5000/products')
             }
         ]
     }

@@ -1,8 +1,13 @@
-import axios from "axios";
+import { useLoaderData } from "react-router-dom";
 import Swal from "sweetalert2";
 
-const AddProduct = () => {
-  const handelAddproduct = (e) => {
+const Updateproduct = () => {
+  const product = useLoaderData();
+  const { _id, photourl, brandname, name, price, rating, type } = product;
+  console.log("==========>>>>>",product);
+
+
+  const handelupdateproduct = (e) => {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
     const photourl = form.get("imgage");
@@ -14,59 +19,63 @@ const AddProduct = () => {
 
     const rating = form.get("rating");
 
-    const product = { photourl, name, brandname, type, price, rating };
-    axios
-      .post("http://localhost:5000/products", product)
-      .then((res) => {
-        console.log("add====>", res.data);
-        if(res.data.insertedId){
-          Swal.fire(
-            'Good job!',
-            'Product added successfully!',
-            'success'
-          )
-        }
-      })
-      .catch((err) => console.log(err));
-// fetch('http://localhost:5000/products',{
-//   method:"POST",
-//   headers:{
-//     "Content-Type":"application/json",
+    const updatedProduct = { _id, photourl, name, brandname, type, price, rating };
+  
+fetch(`http://localhost:5000/products/${_id}`,{
+  method:"PUT",
+  headers:{
+    "Content-Type":"application/json",
 
-//   },
-//   body:JSON.stringify(product),
+  },
+  body:JSON.stringify(updatedProduct),
 
-// })
-// .then((res)=>res.json())
-// .then((data)=>{
-//   console.log(data)
-// })
+})
+.then((res)=>res.json())
+.then((data)=>{
+  console.log(data)
+
+    Swal.fire({
+        title:'Success!',
+        text: 'prduct updated successfully',
+        icon: 'success',
+        confirmButtonText: 'Cool'
+    })
+  
+  
+})
 
   };
 
+
+
   return (
     <div className="bg-cover bg-center min-h-screen flex justify-center items-center bg-image">
+        
       <div className="flex justify-center items-center h-[100vh] ">
-        <form onSubmit={handelAddproduct}>
+
+        <form onSubmit={handelupdateproduct}>
+        <h1 className="py-9">Update your product {name}</h1>
+
           <div className="grid md:grid-cols-2 md:gap-6">
             <div className="relative z-0 w-full mb-6 group">
               <input
                 type="text"
                 name="imgage"
+                defaultValue={photourl}
                 id=""
                 className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent 
-         border-0 border-b-2 border-gray-300 appearance-none dark:text-white
-          dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+           border-0 border-b-2 border-gray-300 appearance-none dark:text-white
+            dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                 placeholder=""
                 required
               />
               <label
                 htmlFor="floating_email"
                 className="peer-focus:font-medium absolute
-          text-sm text-gray-500 dark:text-gray-400 duration-300 
-          transhtmlForm -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0
-           peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100
-            peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+            text-sm text-gray-500 dark:text-gray-400 duration-300 
+            transhtmlForm -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0
+             peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100
+              peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
               >
                 Enter your photourl
               </label>
@@ -75,6 +84,7 @@ const AddProduct = () => {
               <input
                 type="text"
                 name="name"
+                defaultValue={name}
                 id="floating_company"
                 className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                 placeholder=" "
@@ -91,6 +101,7 @@ const AddProduct = () => {
               <input
                 type="text"
                 name="Brandname"
+                defaultValue={brandname}
                 id="floating_company"
                 className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                 placeholder=" "
@@ -107,11 +118,12 @@ const AddProduct = () => {
               <div className="relative">
                 <select
                   name="type"
+                  defaultValue={type}
                   id="floating_company"
                   className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0
-      border-b-2 border-gray-300 appearance-none
-       dark:text-white dark:border-gray-600 dark:focus:border-blue-500
-        focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+        border-b-2 border-gray-300 appearance-none
+         dark:text-white dark:border-gray-600 dark:focus:border-blue-500
+          focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                   required
                 >
                   <option selected disabled>
@@ -136,6 +148,7 @@ const AddProduct = () => {
               <input
                 type="text"
                 name="price"
+                defaultValue={price}
                 id="floating_company"
                 className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                 placeholder=" "
@@ -151,6 +164,7 @@ const AddProduct = () => {
             <div className="relative z-0 w-full mb-6 group">
               <input
                 type="text"
+                defaultValue={rating}
                 name="rating"
                 id="floating_company"
                 className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
@@ -179,4 +193,4 @@ const AddProduct = () => {
   );
 };
 
-export default AddProduct;
+export default Updateproduct;

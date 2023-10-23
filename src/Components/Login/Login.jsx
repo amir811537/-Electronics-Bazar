@@ -1,4 +1,4 @@
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { FcGoogle } from 'react-icons/fc';
 import { useContext } from "react";
 import { AuthContext } from "../../Authprovider/Authprovider";
@@ -6,7 +6,10 @@ import Swal from "sweetalert2";
 
 const Login = () => {
 
-  const {signuprg,googleSignin}=useContext(AuthContext)
+  const {signuprg,googleSignin}=useContext(AuthContext);
+  const location =useLocation();
+  const navigate= useNavigate();
+
 
 
   const handelGoogle = () => {
@@ -60,7 +63,7 @@ const validatePassword = (password) => {
         });
 
         // navigate after log in
-        // navigate(location?.state ? location.state : "/");
+        navigate(location?.state ? location.state : "/");
       })
       .catch((error) => {
         console.error(error);
