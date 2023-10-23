@@ -21,7 +21,7 @@ const Login = () => {
         showConfirmButton: false,
         timer: 3000,
       });
-      Navigate(location?.state ? location.state : "/");
+      navigate(location?.state ? location.state : "/");
 
     });
 };

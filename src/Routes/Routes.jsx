@@ -44,8 +44,8 @@ const router=createBrowserRouter([
             },
             {
                 path:'/updateproduct/:id',
-                element:<Updateproduct></Updateproduct>,
-                loader:({params})=>fetch(`http://localhost:5000/productsbyid/${params.id}`)
+                element:<PrivateRoute><Updateproduct></Updateproduct></PrivateRoute>,
+                loader:({params})=>fetch(`https://electronics-bazar-server.vercel.app/productsbyid/${params.id}`)
             },
             {
                 path:'/singelbranddata/:brand',
@@ -54,7 +54,7 @@ const router=createBrowserRouter([
             {
                 path:'/products/:id',
                 element:<Detailsproduct></Detailsproduct>,
-                loader:()=>fetch('http://localhost:5000/products')
+                loader:()=>fetch('https://electronics-bazar-server.vercel.app/products')
             }
         ]
     }

@@ -13,7 +13,7 @@ const Singelbranddata = () => {
   const getData = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/products/${brand}`
+        `https://electronics-bazar-server.vercel.app/products/${brand}`
       );
       setProducts(response.data);
       if (response.data.length === 0) {
