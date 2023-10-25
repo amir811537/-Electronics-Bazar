@@ -10,6 +10,7 @@ import { HiShoppingBag } from 'react-icons/hi';
 const Navbar = () => {
   const { logOut, user } = useContext(AuthContext);
 
+
   const handelsingout = () => {
     logOut()
       .then((result) => {
@@ -38,7 +39,7 @@ const Navbar = () => {
   );
 
   return (
-    <div className="navbar bg-red-600">
+    <div className="navbar bg-red-600 ">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -59,7 +60,8 @@ const Navbar = () => {
           </label>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box text-black lg:text-white w-52"
+            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box
+             text-black lg:text-white w-52 dark:text-blue-600"
           >
             {navlinks}
           </ul>
@@ -74,7 +76,7 @@ const Navbar = () => {
 
           </div>
         </label>{" "}
-        <h1 className="text-3xl">E-Bazar</h1>
+        <h1 className="text-xl">E-Bazar</h1>
        </div>
       </div>
       <div className="navbar-center hidden lg:flex">
@@ -103,6 +105,7 @@ const Navbar = () => {
           </Link>
         )}
       </div>
+     
     </div>
   );
 };

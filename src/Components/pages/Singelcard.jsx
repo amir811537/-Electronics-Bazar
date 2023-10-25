@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import PrivateRoute from "../../Routes/PrivateRoute";
@@ -6,11 +6,16 @@ import { AuthContext } from "../../Authprovider/Authprovider";
 import { GrView } from 'react-icons/gr';
 import { AiOutlineEdit } from 'react-icons/ai';
 import { AiOutlineDelete } from 'react-icons/ai';
+import "aos/dist/aos.css";
+import AOS from "aos";
 
 const Singelcard = ({ singlecard,setProducts,products }) => {
   const {user}=useContext(AuthContext);
   // console.log(products)
   const [cards, setCards] = useState([]);
+  useEffect(() => {
+    AOS.init();
+  }, []);
 
   const handeldelete = (_id) => {
     console.log(_id);
@@ -43,7 +48,8 @@ const Singelcard = ({ singlecard,setProducts,products }) => {
 
   const { _id, photourl, brandname, name, price, rating, type } = singlecard;
   return (
-    <div className="max-w-sm rounded overflow-hidden shadow-lg">
+    <div className="max-w-sm rounded overflow-hidden shadow-lg"  data-aos="zoom-in-right"
+    onMouseEnter={() => AOS.refresh()}>
       <img className="w-full" src={photourl} alt={name} />
       <div className="px-6 py-4">
         <div className="font-bold text-xl mb-2">{name}</div>

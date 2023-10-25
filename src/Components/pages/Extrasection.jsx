@@ -1,7 +1,14 @@
+import { useEffect } from "react";
+import "aos/dist/aos.css";
+import AOS from "aos";
 
 const Extrasection = () => {
+    useEffect(() => {
+        AOS.init();
+      }, []);
     return (
-        <div className="bg-gray-100 p-6 rounded-md border border-gray-300 m-4">
+        <div className="bg-gray-100 p-6 rounded-md border border-gray-300 m-4"  data-aos="zoom-in-right"
+        onMouseEnter={() => AOS.refresh()}>
             <h2 className="text-2xl font-bold mb-4">
                 Welcome to the Largest Gadget Shop in Bangladesh
             </h2>

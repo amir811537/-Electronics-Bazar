@@ -4,7 +4,8 @@ import Navbar from "../Components/Navbar/Navbar";
 
 const Mainlayout = () => {
     return (
-        <div data-theme='light'>
+        <div>
+             {/* data-theme='dark' */}
             <Navbar></Navbar>
             <Outlet></Outlet>
             <Footer></Footer>

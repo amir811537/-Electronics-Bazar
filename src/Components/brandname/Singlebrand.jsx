@@ -1,10 +1,18 @@
 import { Link } from "react-router-dom";
+import "aos/dist/aos.css";
+import AOS from "aos";
+import { useEffect } from "react";
 
 const Singlebrand = ({singelbrand}) => {
 
+  useEffect(() => {
+    AOS.init();
+  }, []);
+
     const { id,brand_name,brand_image } = singelbrand;
     return (
-        <div className="card w-full bg-base-100 shadow-xl">
+        <div className="card w-full bg-base-100 shadow-xl" data-aos="zoom-in-right"
+        onMouseEnter={() => AOS.refresh()}>
         <figure className="px-10 pt-10">
           <img  src={brand_image}alt="Shoes" className="rounded-xl  " />
         </figure>

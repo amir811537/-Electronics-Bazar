@@ -1,16 +1,16 @@
-import useTheme from "../../darkmode/Darkmode";
+// import useTheme from "../../darkmode/Darkmode";
 import Brand from "../brandname/Brand";
 import Alldata from "./Alldata";
 import Banner from "./Banner";
 import Extrasection from "./Extrasection";
+import SecondExtra from "./SecoundExtra";
 
 const Home = () => {
-     function ThemBotton(){
-        const {toggleTheme}=useTheme()
-     }
+    //  function ThemBotton(){
+    //     const {toggleTheme}=useTheme()
+    //  }
     return (
         <div>
-<button>change</button>
 <div className="py-3">
     
 <Banner></Banner>
@@ -28,6 +28,10 @@ const Home = () => {
                 All products here :
             </div>
             <Alldata></Alldata>
+            <div>
+<SecondExtra></SecondExtra>
+
+            </div>
             <div className="py-6">
                 <Extrasection></Extrasection>
             </div>
