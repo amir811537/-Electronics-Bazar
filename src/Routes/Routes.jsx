@@ -11,6 +11,7 @@ import Updateproduct from "../Components/pages/Updateproduct";
 import Singelbranddata from "../Components/pages/Singelbranddata";
 import PrivateRoute from "./PrivateRoute";
 import Detailsproduct from "../Components/pages/Detailsproduct";
+import Singelcard from "../Components/pages/Singelcard";
 
 const router=createBrowserRouter([
     {
@@ -53,9 +54,10 @@ const router=createBrowserRouter([
             },
             {
                 path:'/products/:id',
-                element:<Detailsproduct></Detailsproduct>,
+                element:<PrivateRoute><Detailsproduct></Detailsproduct></PrivateRoute>,
                 loader:()=>fetch('https://electronics-bazar-server.vercel.app/products')
-            }
+            },
+            
         ]
     }
 ]);

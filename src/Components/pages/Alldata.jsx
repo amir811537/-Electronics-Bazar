@@ -30,7 +30,7 @@ const Alldata = () => {
               singlecard={singlecard}
             ></Singelcard>
           ))
-        : products.slice(0, 12).map((singlecard) => (
+        : products.slice(0, 6).map((singlecard) => (
             <Singelcard
               key={singlecard._id}
               products={products}
@@ -38,7 +38,7 @@ const Alldata = () => {
               singlecard={singlecard}
             ></Singelcard>
           ))}
-      {products.length > 12 && (
+      {products.length > 6 && (
        <div className="my-auto mx-auto">
          <button onClick={() => setShowAll(!showAll)}>
           {showAll ? "See Less" : "See All"}

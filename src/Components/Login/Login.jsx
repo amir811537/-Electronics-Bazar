@@ -52,6 +52,9 @@ const validatePassword = (password) => {
     }
   
 
+
+    
+
     signuprg(email, password)
       .then((result) => {
         console.log(result);

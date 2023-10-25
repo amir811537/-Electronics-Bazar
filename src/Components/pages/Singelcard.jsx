@@ -1,9 +1,15 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import PrivateRoute from "../../Routes/PrivateRoute";
+import { AuthContext } from "../../Authprovider/Authprovider";
+import { GrView } from 'react-icons/gr';
+import { AiOutlineEdit } from 'react-icons/ai';
+import { AiOutlineDelete } from 'react-icons/ai';
 
 const Singelcard = ({ singlecard,setProducts,products }) => {
-  console.log(products)
+  const {user}=useContext(AuthContext);
+  // console.log(products)
   const [cards, setCards] = useState([]);
 
   const handeldelete = (_id) => {
@@ -61,18 +67,20 @@ const Singelcard = ({ singlecard,setProducts,products }) => {
           <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
 
             <Link to={`/products/${_id}`}>
-            <button>view</button>
+            <button className="flex items-center"> <GrView></GrView>Details</button>
 
             </Link>
           </span>
           <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
             <Link to={`/updateproduct/${_id}`}>
-              <button>Edit</button>
+              <button className="flex items-center"> <AiOutlineEdit></AiOutlineEdit>Edit</button>
             </Link>
           </span>
-          <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-            <button onClick={() => handeldelete(_id)}>Delete</button>
+          {
+            user && <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+            <button  className="flex items-center" onClick={() => handeldelete(_id)}> <AiOutlineDelete></AiOutlineDelete>Delete</button>
           </span>
+          }
         </div>
       </div>
     </div>

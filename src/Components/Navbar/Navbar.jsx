@@ -1,6 +1,11 @@
 import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../Authprovider/Authprovider";
+import { AiFillHome } from 'react-icons/ai';
+import { SlLogin } from 'react-icons/sl';
+import { BsCartCheck } from 'react-icons/bs';
+import { MdAddBusiness } from 'react-icons/md';
+import { HiShoppingBag } from 'react-icons/hi';
 
 const Navbar = () => {
   const { logOut, user } = useContext(AuthContext);
@@ -18,16 +23,16 @@ const Navbar = () => {
   const navlinks = (
     <>
       <li>
-        <NavLink to="/">Home</NavLink>
+        <NavLink to="/"> <AiFillHome></AiFillHome> Home</NavLink>
       </li>
       <li>
-        <NavLink to="/AddProduct">Add Product</NavLink>
+        <NavLink to="/AddProduct"> <MdAddBusiness></MdAddBusiness> Add Product</NavLink>
       </li>
       <li>
-        <NavLink to="/myCart">My Cart</NavLink>
+        <NavLink to="/myCart"> <BsCartCheck></BsCartCheck> My Cart</NavLink>
       </li>
       <li>
-        <NavLink to="/login">Login</NavLink>
+        <NavLink to="/login"> <SlLogin></SlLogin> Login</NavLink>
       </li>
     </>
   );
@@ -59,11 +64,18 @@ const Navbar = () => {
             {navlinks}
           </ul>
         </div>
-        <label tabIndex={0} className="btn btn-ghost btn-circle lg:w-16 avatar">
+       <div className="flex items-center justify-center">
+
+
+       <label tabIndex={0} className="btn btn-ghost">
           <div className="w-full rounded">
-            <img src="https://i.ibb.co/vqz3DZm/Screenshot4225x225.png" />
+            {/* <img src="https://i.ibb.co/vqz3DZm/Screenshot4225x225.png" /> */}
+            <HiShoppingBag className="text-3xl"></HiShoppingBag>
+
           </div>
         </label>{" "}
+        <h1 className="text-3xl">E-Bazar</h1>
+       </div>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1 text-black lg:text-white">

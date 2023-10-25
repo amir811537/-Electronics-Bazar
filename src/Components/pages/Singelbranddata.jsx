@@ -37,7 +37,6 @@ const Singelbranddata = () => {
         </div>
       ) : (
         <>
-          <p>This is single loaded data: {products.length}</p>
           {products.map((singlecard) => (
             <Singelcard
               key={singlecard._id}
